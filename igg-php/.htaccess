@@ -1,0 +1,11 @@
+Options +FollowSymLinks -MultiViews
+# Turn mod_rewrite on
+RewriteEngine On
+RewriteBase /
+
+# Link from review site to zip. 302 works, 301 not.
+Redirect 302 /alpha/IndiegameGarden_Alpha-5.zip http://indiegamegarden.com/
+
+## To internally redirect /dir/foo to /dir/foo.php
+RewriteCond %{REQUEST_FILENAME}.php -f [NC]
+RewriteRule ^ %{REQUEST_URI}.php [L]
