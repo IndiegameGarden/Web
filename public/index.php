@@ -12,9 +12,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="grid">
-
+                
 								<div class="row" style="height: 100px;">            	
 		            	<font style="font-weight: bold;" size="+1">Where indie games grow!</font>
 		            	&nbsp // &nbsp
@@ -26,7 +25,7 @@
 								</div>
 
                 <div class="row">
-                    <div class="span3">
+                    <div class="span2">
                      	<div style="overflow: hidden">
                      		<a href="games/Quest for the Pixel Princess XIV.exe">
 	                    		<img src="images/quest14-tile.png" />
@@ -35,15 +34,15 @@
                     </div>
 
                     <div class="span3">
-                     	<div style="height: 90px; overflow: hidden">
+                     	<div style="overflow: hidden">
                      		<a href="games/Indiegame Garden 7.exe">
-	                    			<img src="images/igg-icon.png" />
+	                    			<img src="images/igg-tile.png" />
 	                    	</a>
 	                    </div>
                     </div>                    
 
                     <div class="span3">
-                        	<div style="height: 90px; overflow: hidden">
+                        	<div style="overflow: hidden">
                         		<a href="games/Quest for the Pixel Princess.exe">
                         			<img src="images/quest-pixel-princess.png" />
                         		</a>
