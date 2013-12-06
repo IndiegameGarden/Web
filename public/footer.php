@@ -3,7 +3,6 @@
             <div class="nav-bar-inner padding10">
                 <span class="element">
                     &copy; 2010-2013 <a href="mailto:info@indiegamegarden.com">Indiegame Garden</a> and others.
-                    Styled with <a href="http://metroui.org.ua">Metro UI CSS</a>.
                 </span>
             </div>
         </div>
