@@ -27,24 +27,24 @@
                 <div class="row">
                     <div class="span2">
                      	<div style="overflow: hidden">
-                     		<a href="games/Quest for the Pixel Princess XIV.exe">
+                     		<a href="games/Quest for the Pixel Princess XIV.exe" title="Game // Requires XNA 4.0">
 	                    		<img src="images/quest14-tile.png" />
 	                    	</a>
 	                    </div>
                     </div>
 
-                    <div class="span3">
+                    <div class="span2">
                      	<div style="overflow: hidden">
-                     		<a href="games/Indiegame Garden 7.exe">
+                     		<a href="games/Indiegame Garden 7.exe" title="Grow your own garden full of indie games! // Requires XNA 4.0. Can't run from IE, use Firefox/Chrome :)">
 	                    			<img src="images/igg-tile.png" />
 	                    	</a>
 	                    </div>
                     </div>                    
 
-                    <div class="span3">
+                    <div class="span2">
                         	<div style="overflow: hidden">
-                        		<a href="games/Quest for the Pixel Princess.exe">
-                        			<img src="images/quest-pixel-princess.png" />
+                        		<a href="games/Quest for the Pixel Princess.exe" title="Maze Game // Requires XNA 4.0"">
+                        			<img src="images/quest-tile.png" />
                         		</a>
                         	</div>
                     </div>
@@ -56,5 +56,5 @@
     </div>
 </div>
 
-<br><br><br>
+<br><br><br><br>
 <? include("footer.php")?>
