@@ -2,7 +2,8 @@
         <div class="nav-bar bg-color-white">
             <div class="nav-bar-inner padding10">
                 <span class="element">
-                    &copy; 2010-2013 <a href="mailto:info@indiegamegarden.com">Indiegame Garden</a> and others.
+										Partly <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+										by <a href="mailto:info@indiegamegarden.com">Indiegame Garden</a> &nbsp // &nbsp partly &copy; by others.
                 </span>
             </div>
         </div>
