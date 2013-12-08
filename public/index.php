@@ -42,14 +42,32 @@
                     </div>                    
 
                     <div class="span2">
-                        	<div style="overflow: hidden">
-                        		<a href="games/Quest for the Pixel Princess.exe" title="Maze Game // Requires XNA 4.0"">
-                        			<img src="images/quest-tile.png" />
-                        		</a>
-                        	</div>
+                    	<div style="overflow: hidden">
+                    		<a href="games/Quest for the Pixel Princess.exe" title="Maze Game // Requires XNA 4.0">
+                    			<img src="images/quest-tile.png" />
+                    		</a>
+                    	</div>
                     </div>
                     
                 </div>
+            </div>
+            
+            <div class="grid">
+                <div class="row">
+                    <div class="span3">
+                    		<a href="games/Fox Aliens From Space.exe" title="jump as mr zuper hero dude!">
+                    			<img src="images/foxaliens-tile.png" />
+                    		</a>
+                    </div>
+							  </div>
+
+                <div class="row">
+                    <div class="span3">
+                    		<a href="games/Game Title.exe" title="Zeldaesque dungeon crawler">
+                    			<img src="images/gametitle-tile.png" />
+                    		</a>
+                    </div>
+							  </div>
 
             </div>
         </div>
