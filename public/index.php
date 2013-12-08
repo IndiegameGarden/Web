@@ -12,9 +12,10 @@
                     </div>
                 </div>
             </div>
+            
             <div class="grid">
                 
-								<div class="row" style="height: 100px;">            	
+								<div class="row">            	
 		            	<font style="font-weight: bold;" size="+1">Where indie games grow!</font>
 		            	&nbsp // &nbsp
 									Games. Art. Music. Experiences. 
@@ -24,34 +25,32 @@
 									<a href="http://indiegamegarden.tumblr.com/" target="_blank">Tumblr</a>
 								</div>
 
+                <br>
+                First... our digital creations.<br><br>
+                
                 <div class="row">
                     <div class="span2">
-                     	<div style="overflow: hidden">
                      		<a href="games/Quest for the Pixel Princess XIV.exe" title="Game // Requires XNA 4.0">
 	                    		<img src="images/quest14-tile.png" />
 	                    	</a>
-	                    </div>
                     </div>
 
                     <div class="span2">
-                     	<div style="overflow: hidden">
-                     		<a href="games/Indiegame Garden 7.exe" title="Grow your own garden full of indie games! // Requires XNA 4.0. Can't run from IE, use Firefox/Chrome :)">
+                     		<a href="games/Indiegame Garden 7.exe" title="Grow your own garden full of indie games! // Requires XNA 4.0. Can't run from IE (yet); use Firefox/Chrome :)">
 	                    			<img src="images/igg-tile.png" />
 	                    	</a>
-	                    </div>
                     </div>                    
 
                     <div class="span2">
-                    	<div style="overflow: hidden">
                     		<a href="games/Quest for the Pixel Princess.exe" title="Maze Game // Requires XNA 4.0">
                     			<img src="images/quest-tile.png" />
                     		</a>
-                    	</div>
                     </div>
                     
                 </div>
             </div>
-            
+
+						And here... digital collectibles made by others.<br>
             <div class="grid">
                 <div class="row">
                     <div class="span3">
