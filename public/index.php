@@ -16,9 +16,7 @@
             <div class="grid">
                 
 								<div class="row">            	
-		            	<font style="font-weight: bold;" size="+1">Where indie games grow!</font>
-		            	&nbsp // &nbsp
-									Games. Art. Music. Experiences. 
+		            	<font style="font-weight: bold;" size="+1">Where indie games grow!</font>		            	
 									&nbsp // &nbsp
 									<a href="http://twitter.com/IndiegameGarden/" target="_blank">@IndiegameGarden</a> 
 									&nbsp // &nbsp
@@ -26,7 +24,7 @@
 								</div>
 
                 <br>
-                First... our digital creations.<br><br>
+                Games. Art. Music. Experiences. Created by Indiegame Garden.<br><br>
                 
                 <div class="row">
                     <div class="span2">
@@ -58,14 +56,19 @@
                     			<img src="images/foxaliens-tile.png" />
                     		</a>
                     </div>
-							  </div>
 
-                <div class="row">
                     <div class="span3">
                     		<a href="games/Game Title.exe" title="Zeldaesque dungeon crawler">
                     			<img src="images/gametitle-tile.png" />
                     		</a>
                     </div>
+
+                    <div class="span3">
+                    		<a href="games/KARATE.exe" title="KARATE!">
+                    			<img src="images/karate-tile.png" />
+                    		</a>
+                    </div>
+
 							  </div>
 
             </div>
