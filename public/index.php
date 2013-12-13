@@ -51,21 +51,34 @@
 						And here... digital collectibles made by others.<br>
             <div class="grid">
                 <div class="row">
-                    <div class="span3">
+
+                    <div class="span2">
+                    		<a href="games/Magic Owl.exe" title="A magical world!">
+                    			<img src="images/owl-tile.png" style="width: 128px" />
+                    		</a>
+                    </div>
+
+                    <div class="span2">
+                    		<a href="games/Olson's Journey.exe" title="Can you help mr Olson?">
+                    			<img src="images/olson-tile.png" style="width: 128px" />
+                    		</a>
+                    </div>
+
+                    <div class="span2">
                     		<a href="games/Fox Aliens From Space.exe" title="jump as mr zuper hero dude!">
-                    			<img src="images/foxaliens-tile.png" />
+                    			<img src="images/foxaliens-tile.png" style="width: 128px" />
                     		</a>
                     </div>
 
-                    <div class="span3">
+                    <div class="span2">
                     		<a href="games/Game Title.exe" title="Zeldaesque dungeon crawler">
-                    			<img src="images/gametitle-tile.png" />
+                    			<img src="images/gametitle-tile.png" style="width: 128px" />
                     		</a>
                     </div>
 
-                    <div class="span3">
+                    <div class="span2">
                     		<a href="games/KARATE.exe" title="KARATE!">
-                    			<img src="images/karate-tile.png" />
+                    			<img src="images/karate-tile.png" style="width: 128px" />
                     		</a>
                     </div>
 
