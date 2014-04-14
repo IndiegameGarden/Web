@@ -4,13 +4,19 @@ float squareWidth;
 float amountOfSquaresHeight =17.0;
 float squareHeight;
 float shrinkFactor = 0.5;
-float topleftOffset = 5;
+float topleftOffset = 10.0;
+float centerOffset;
 
 void setup() {
   //size(710, 500);
-  size(window.innerWidth * 0.92, window.innerHeight * 0.92); 
+  size(window.innerWidth * 0.8, window.innerHeight * 0.8); 
   squareWidth = width/amountOfSquaresWidth;
   squareHeight = height/amountOfSquaresHeight;
+  if(squareWidth < squareHeight) squareHeight = squareWidth;
+  if(squareHeight < squareWidth) squareWidth = squareHeight;
+  centerOffset = width/2 - (amountOfSquaresWidth * squareWidth)/2; 
+  centerOffsetVert = height/2 - (amountOfSquaresHeight * squareHeight)/2;
+  
   ellipseMode(CORNER);
   colorMode(HSB, 100);
   background(97);
@@ -37,7 +43,7 @@ void drawIt() {
       if( random(0,1) > 0.5)
         r = 100;
       fill(random(0, r), random(50, 80), random(30, 99));
-      ellipse(topleftOffset+(x*squareWidth), topleftOffset+(y*squareHeight), squareWidth * shrinkFactor, squareHeight * shrinkFactor);
+      ellipse(centerOffset+(x*squareWidth), topleftOffset+centerOffsetVert+(y*squareHeight), squareWidth * shrinkFactor, squareHeight * shrinkFactor);
     }
   }
 }
