@@ -24,17 +24,30 @@
 		<script src="processing.js" type="text/javascript"></script>
 		<script src="buzz.min.js" type="text/javascript"></script>     
 		<script type="text/javascript">
-  		var mySound = new buzz.sound( "tuvan", {
-      formats: [ "mp3", "ogg" ]
-      });
+      function initAudio() {
+    		var audio = new buzz.sound( "tuvan", {
+          formats: [ "mp3", "ogg" ]
+        });
+        
+        audio.play()
+            .fadeIn()
+            .loop();
+  
+        var self = this;
+        //not sure if you need this, but it's better to be safe
+        self.audio = audio;
+        var startAudio = function(){
+                             self.audio.play().fadeIn().loop();
+                             document.removeEventListener("touchstart", self.startAudio, false);
+                         }
+        self.startAudio = startAudio;
+    
+        document.addEventListener("touchstart", self.startAudio, false);
+        //self.audio.addEventListener("play", self.pauseAudio, false);
+      }              
       
-      mySound.play()
-          .fadeIn()
-          .loop()
-          .bind( "timeupdate", function() {
-             var timer = buzz.toTimer( this.getTime() );
-             document.getElementById( "timer" ).innerHTML = timer;
-          });
+      initAudio();
+      
 		</script>
 		<script type="text/javascript">
 // convenience function to get the id attribute of generated sketch html element
