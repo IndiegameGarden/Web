@@ -1,4 +1,7 @@
 
+// TODO list
+// -remove sidebar bug when zooming
+
 // variables to tweak
 boolean isRandomParty = false;
 float dxs = 2;  // sampling grid size x
@@ -7,9 +10,10 @@ float dx = 8;               // rendering grid size x
 float dy = 8;               // rendering grid size y
 float brightnessThresh = 0.33; // threshold for dark-pixel detection in sampling image
 float dotSizeMax = 0.7;         // relative size 0..1 of dots, can be also >1
-float bpm = 131.747;
+float bpm = 131.747;          // bpm for selected song
 float imagePeriod = 4.0 * (60.0/bpm);     // time period (s) that each image is shown
 int   imageIndex = 0;        // first image to show
+float BGCOL=0;  // background color value 0-1
 
 // other vars
 ArrayList<PImage> aImages = new ArrayList<PImage>();
@@ -17,13 +21,17 @@ float hueOffset = random(0, 0.2);
 int   prevMillis=0;  // time keeping
 float imageTime = 0.0;  // time shown for current image
 float x, y;
+float totShapeHeight, totShapeWidth;
+float lastInnerWidth, lastInnerHeight;
 
 void setup() {
-  goFullScreen();
+  //goFullScreen();
   colorMode(RGB, 1);
   background(0.90196); // 230 = E6
   //size(displayWidth, displayHeight);
-  size(window.innerWidth * 0.9999999, window.innerHeight * 0.9999999);  
+  lastInnerWidth = window.innerWidth;
+  lastInnerHeight = window.innerHeight;
+  size(window.innerWidth * 0.999, window.innerHeight * 0.999);  
   //size(900,600); 
   noStroke();
   loadImages();
@@ -33,15 +41,17 @@ boolean sketchFullScreen() {
   return true;
 }
 
-function goFullScreen(){
-    var canvas = document.getElementById("dance");
-    if(canvas.requestFullScreen)
-        canvas.requestFullScreen();
-    else if(canvas.webkitRequestFullScreen)
-        canvas.webkitRequestFullScreen();
-    else if(canvas.mozRequestFullScreen)
-        canvas.mozRequestFullScreen();
+/*
+function goFullScreen() {
+  var canvas = document.getElementById("dance");
+  if (canvas.requestFullScreen)
+    canvas.requestFullScreen();
+  else if (canvas.webkitRequestFullScreen)
+    canvas.webkitRequestFullScreen();
+  else if (canvas.mozRequestFullScreen)
+    canvas.mozRequestFullScreen();
 }
+*/
 
 void loadImages() {
   PImage img;
@@ -54,8 +64,10 @@ void loadImages() {
 
 void renderImageDots(PImage im, float x, float y, float hueOffset, float timeFraction, float dotSizeScale) {
   color c; 
-  for (float xs = dxs/2; xs <= (im.width-dxs/2) ; xs+=dxs ) {
-    for (float ys = dys/2; ys < (im.height-dys/2) ; ys+=dys ) {
+  float xsmax = (im.width-dxs/2);
+  float ysmax = (im.height-dys/2);
+  for (float xs = dxs/2; xs <= xsmax ; xs+=dxs ) {
+    for (float ys = dys/2; ys < ysmax ; ys+=dys ) {
       c = im.get( (int)(round(xs)), (int)(round(ys)) );  // sample pixel
       if (brightness(c) < brightnessThresh) {  // if pixel dark...
         colorMode(HSB);
@@ -65,6 +77,8 @@ void renderImageDots(PImage im, float x, float y, float hueOffset, float timeFra
       }
     }
   }
+  totShapeWidth = xsmax/dxs*dx;
+  totShapeHeight = ysmax/dys*dy;
 }
 
 void renderImageFull(PImage im, float x, float y, float hueOffset, float timeFraction) {
@@ -76,41 +90,67 @@ void renderImageFull(PImage im, float x, float y, float hueOffset, float timeFra
 
 void mouseClicked() {
   imageTime= imagePeriod; // skip to next period
-  isRandomParty = false;
+  if (mouseButton == LEFT)
+    isRandomParty = false;
   if (mouseButton == RIGHT)
-    isRandomParty = true;
+    isRandomParty = !isRandomParty;
 }
 
 void keyPressed() {
   switch(key) {
-  case 'f':    
+  case '5':    
     imagePeriod /= 2.0; 
     break;
-  case 's':    
+  case '6':    
     imagePeriod *= 2.0; 
     break;
   case 'r':
+  case 'R':
     isRandomParty = !isRandomParty;
     break;
   case '1':
-    dxs /= 2.0; dys /= 2.0;
+    if(dxs>=2.0) dxs /= 2.0; 
+    if(dys>=2.0) dys /= 2.0;
     break;
   case '2':
-    dxs *= 2.0; dys *= 2.0;
+    dxs *= 2.0; 
+    dys *= 2.0;
     break;
   case '3':
-    dx /= 1.5; dy /= 1.5; break;
+    if(dx>=1.5) dx /= 1.5; 
+    if(dy>=1.5) dy /= 1.5; 
+    break;
   case '4':
-    dx *= 1.5; dy *= 1.5; break;
+    dx *= 1.5; 
+    dy *= 1.5; 
+    break;
+  case '0':
+    BGCOL = 1-BGCOL;
+    break;    
   default:
     imageTime= imagePeriod; // skip to next period      
     isRandomParty = false;
+    if ( key >= 'A' && key <= 'Q' ) {
+      imageIndex = key - 'A';
+    }
+    else if (key >='a' && key <= 'q') {
+      imageIndex = key - 'a';
+    }
     break;
   }
 }
 
 void draw() {
-  //goFullScreen();  
+  boolean isChangePos = false;
+  //goFullScreen();
+  
+  // auto-resizing behaviour for browser
+  if (lastInnerWidth != window.innerWidth || lastInnerHeight != window.innerHeight) {
+    size(window.innerWidth * 0.999, window.innerHeight * 0.999);  
+    background(0);
+    lastInnerWidth = window.innerWidth;
+    lastInnerHeight = window.innerHeight;  
+  }  
 
   // time keeping
   float dt = ((float)(millis() - prevMillis))/1000;
@@ -124,23 +164,20 @@ void draw() {
     if (imageIndex >= aImages.size() )
       imageIndex = 0;
     hueOffset = random(0, 0.8);      // pick new hue value
-    x = dx * round(random(0, width-280)/dx);
-    y = dy * round(random(-32, height-290)/dy); 
+    isChangePos = true;
   }
 
   float timeFraction = imageTime/imagePeriod ;
 
   // random party mode
-  if (isRandomParty) {
-    //x = dx * (sin(34.245*timeFraction) + width*0.05*timeFraction); //random(2, 50);
-    //y = dy * (cos(23.343*timeFraction) + width*0.05*timeFraction); //random(2, 25);
-    x = dx*random(-1, 60);
-    y = dy*random(-1, 30);
+  if (isRandomParty || isChangePos ) {
+    x = dx * round(random(0, width-totShapeWidth)/dx);
+    y = dy * round(random(-32, height-totShapeHeight)/dy);
   }
 
   // fade-out of previous image
   colorMode(RGB);
-  fill(1, 1, 1, 0.044);
+  fill(BGCOL, BGCOL, BGCOL, 0.044);
   rect(0, 0, width, height);
 
   // render new image of dots
