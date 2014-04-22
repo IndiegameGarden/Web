@@ -3,6 +3,7 @@
 void addWorks() {
   yr(2014); 
   icon("2014");
+  work("dance", "Dance!");
   work("arginino", null);
   work("VII", null);
   yr(2013); 
@@ -23,7 +24,7 @@ int dxim=100; // image sz
 int dyim=100;
 String DOWNLOAD_DIR = "games";
 String ICON_DIR = "images";
-int MAX_COLS = 5;
+int MAX_COLS = 6;
 float BRDx = ((dx-dxim)/2)/dx;
 float BRDy = ((dy-dyim)/2)/dy;
 int curYear = 0;
