@@ -176,16 +176,20 @@ void mouseClicked() {
     //println("click ("+x+","+y+"): " + w.id );
     if (w.isExe && !w.isDownloading() ) {
       w.downloadIt();
-      loadUrl(DOWNLOAD_DIR + "/" + w.exeFile );
+      loadUrl(DOWNLOAD_DIR + "/" + w.exeFile , false);
     }
     else if (!w.isExe) {
-      loadUrl(w.url);
+      loadUrl(w.url,true);
     }
   }
 }
 
-void loadUrl(String url) {
-  window.open(url, "_self");
+void loadUrl(String url, boolean fullScreen) {
+  if (fullScreen) {
+    openIframe(url);
+  }else{
+    window.open(url, "_self");
+  }
   //window.open(url);
   //println("Loading "+url); // for Java mode testing
 }
