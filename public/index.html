@@ -5,8 +5,8 @@
   <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1">
   <meta name="description" content="Indiegame Garden // Where indie games grow!">
   <meta name="author" content="Indiegame Garden">
-  <meta name="keywords" content="indiegame, game garden, indie, games, art, music, experiences, experimental">
-  <title>Indiegame Garden // Where indie games grow!</title>
+  <meta name="keywords" content="indiegame, game garden, indie, games, video games, GAME, web art, art, music, experiences, experimental">
+  <title>Indiegame Garden</title>
   
 	<style type="text/css">
 	body {
@@ -30,7 +30,6 @@
 	#iconspace { 
 		margin: 0px; padding: 0px;
 		width: 800px; overflow: hidden;
-		background-color: #fff;
 	}
 	#page {
     margin-left: auto;
@@ -40,6 +39,25 @@
 	</style>
 
 	<script src="processing.js" type="text/javascript"></script>
+	<script src="screenfull.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		function openIframe(url) {
+		  // We create an iframe and fill the window with it
+      var iframe = document.createElement('iframe');
+      iframe.setAttribute('id', 'external-iframe');
+      iframe.setAttribute('src', url);
+      iframe.setAttribute('frameborder', 'no');
+      iframe.style.position = 'absolute';
+      iframe.style.top = '0';
+      iframe.style.right = '0';
+      iframe.style.bottom = '0';
+      iframe.style.left = '0';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      document.getElementById("page").appendChild(iframe);
+      document.body.style.overflow = 'hidden';
+  	}
+	</script>
 	<script type="text/javascript">
 // convenience function to get the id attribute of generated sketch html element
 function getProcessingSketchId () { return 'iggproc'; }
