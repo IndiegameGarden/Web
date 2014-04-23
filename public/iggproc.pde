@@ -185,13 +185,8 @@ void mouseClicked() {
   }
 }
 
-void loadUrl(String url, boolean fullScreen) {
-  if (fullScreen) {
-    openIframe(url);
-  }else{
-    window.open(url, "_self");
-  }
-  //window.open(url);
+void loadUrl(String url, boolean isOnlineWork) {
+   window.open(url, "_self");
   //println("Loading "+url); // for Java mode testing
 }
 
