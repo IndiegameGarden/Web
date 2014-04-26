@@ -193,17 +193,16 @@ void mouseClicked() {
     //println("click ("+x+","+y+"): " + w.id );
     if (w.isExe && !w.isDownloading() ) {
       w.downloadIt();
-      loadUrl(DOWNLOAD_DIR + "/" + w.exeFile );
+      loadUrl(DOWNLOAD_DIR + "/" + w.exeFile , false);
     }
     else if (!w.isExe) {
-      loadUrl(w.url);
+      loadUrl(w.url,true);
     }
   }
 }
 
-void loadUrl(String url) {
-  window.open(url, "_self");
-  //window.open(url);
+void loadUrl(String url, boolean isOnlineWork) {
+   window.open(url, "_self");
   //println("Loading "+url); // for Java mode testing
 }
 
