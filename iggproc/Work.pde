@@ -20,12 +20,12 @@ class Work {
   float circleAnim = 0.0;
   float circleAnimEnd = 0.0;
 
-  public Work(String id, int year, String title) {
+  public Work(String id, int year, String title, String iconType) {
     this.id = id;
     this.year = year;
     this.name = id;
     this.url = id;
-    this.iconFile = ICON_DIR + "/" + id + ".png";
+    this.iconFile = ICON_DIR + "/" + id + "." + iconType;
     if (title==null)
       this.title = id;
     else
