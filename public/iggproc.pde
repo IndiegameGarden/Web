@@ -9,6 +9,7 @@ void addWorks() {
   yr(2013); 
   icon("2013");
   exe ("quest14", "Quest for the Pixel Princess XIV", "Quest for the Pixel Princess XIV.exe", 4239);
+  exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
   yr(2012); 
   icon("2012");
   exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
@@ -35,24 +36,39 @@ ArrayList<Work> aWorks = new ArrayList<Work>();
 void yr(int yr) {
   curYear = yr;
 }
+
 // helper method 'icon'
 void icon(String id) {
-  Work w = new Work(id, curYear, id);
+  Work w = new Work(id, curYear, id, "png");
   w.isClickable = false;
   aWorks.add(w);
 }
-// helper method 'online work'
-void work(String id, String title) {
-  Work w = new Work(id, curYear, title);
+
+// helper methods 'online work'
+void workAdd(String id, String title, String iconType) {
+  Work w = new Work(id, curYear, title, iconType);
   aWorks.add(w);
 }
-// helper method 'exe work'
-void exe(String id, String title, String exeFile, int kbSize) {
-  Work w = new Work(id, curYear, title);
+void work(String id, String title) {
+  workAdd( id,  title,  "png");
+}
+void workJpg(String id, String title) {
+  workAdd( id,  title,  "jpg");
+}
+
+// helper methods 'exe work'
+void exeAdd(String id, String title, String exeFile, int kbSize, String iconType) {
+  Work w = new Work(id, curYear, title, iconType);
   w.isExe = true;
   w.exeFile = exeFile;
   w.kbSize = kbSize;
   aWorks.add(w);
+}
+void exe(String id, String title, String exeFile, int kbSize) {
+   exeAdd( id,  title,  exeFile,  kbSize, "png");
+}
+void exeJpg(String id, String title, String exeFile, int kbSize) {
+   exeAdd(id,  title,  exeFile,  kbSize, "jpg");
 }
 
 void setup() {
@@ -213,12 +229,12 @@ class Work {
   float circleAnim = 0.0;
   float circleAnimEnd = 0.0;
 
-  public Work(String id, int year, String title) {
+  public Work(String id, int year, String title, String iconType) {
     this.id = id;
     this.year = year;
     this.name = id;
     this.url = id;
-    this.iconFile = ICON_DIR + "/" + id + ".png";
+    this.iconFile = ICON_DIR + "/" + id + "." + iconType;
     if (title==null)
       this.title = id;
     else
