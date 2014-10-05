@@ -18,8 +18,8 @@ void addWorks() {
 
 boolean isSelected = false;
 float selx, sely; // mouse cursor pos of selected work
-float dx=128; // grid
-float dy=128;
+float dx=116; // grid
+float dy=116;
 float mbitPerSec = 5;
 int dxim=100; // image sz
 int dyim=100;
@@ -41,6 +41,7 @@ void yr(int yr) {
 void icon(String id) {
   Work w = new Work(id, curYear, id, "png");
   w.isClickable = false;
+  w.hasNewline = true;
   aWorks.add(w);
 }
 
@@ -73,7 +74,7 @@ void exeJpg(String id, String title, String exeFile, int kbSize) {
 
 void setup() {
   smooth();
-  size(800, 260 );
+  size(800, 360 );
   background(255);
   addWorks();
 }
@@ -128,11 +129,15 @@ void drawIcons(float dt) {
   int y = 0;
   for (n=0; n < aWorks.size(); n++) {
     Work w = aWorks.get(n);    
+    if ( w.hasNewline && n > 0 ) {
+      x=0;
+      y++;
+    }
     w.x = x;
     w.y = y;
     w.drawIt(dt);
     x++;
-    if ( x >= MAX_COLS ) {
+    if ( x >= MAX_COLS) {
       x=0;
       y++;
     }
@@ -218,6 +223,7 @@ class Work {
   String title;
   boolean isExe = false;
   boolean isClickable = true;
+  boolean hasNewline = false;
   String exeFile;
   int kbSize = 0;
 
