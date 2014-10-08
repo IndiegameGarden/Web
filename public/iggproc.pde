@@ -14,6 +14,9 @@ void addWorks() {
   icon("2012");
   //exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   exe ("quest", "Quest for the Pixel Princess", "Quest for the Pixel Princess.exe", 6229);
+  icon("2002");
+  work("curved", null);
+  work("ultrasonic-reflections", null);
 }
 
 boolean isSelected = false;
@@ -21,6 +24,7 @@ float selx, sely; // mouse cursor pos of selected work
 float dx=116; // grid
 float dy=116;
 float mbitPerSec = 5;
+float tChange = 0;
 int dxim=100; // image sz
 int dyim=100;
 String DOWNLOAD_DIR = "games";
@@ -31,6 +35,7 @@ float BRDy = ((dy-dyim)/2)/dy;
 int curYear = 0;
 int prevMillis = 0;
 ArrayList<Work> aWorks = new ArrayList<Work>();
+int selWork = 0;
 
 // helper method 'set new year'
 void yr(int yr) {
@@ -41,7 +46,7 @@ void yr(int yr) {
 void icon(String id) {
   Work w = new Work(id, curYear, id, "png");
   w.isClickable = false;
-  w.hasNewline = true;
+  //w.hasNewline = true;
   aWorks.add(w);
 }
 
@@ -74,7 +79,7 @@ void exeJpg(String id, String title, String exeFile, int kbSize) {
 
 void setup() {
   smooth();
-  size(800, 360 );
+  size(800, 280 );
   background(255);
   addWorks();
 }
@@ -110,7 +115,7 @@ void drawDiffusion(float dt) {
   x+=random(-68, 68);
   y+=random(-68, 68);
   for (int i=0; i < 100; i++) {
-    int rx = (int) round(random(-2, 2));
+    int rx = (int) round(	(-2, 2));
     int ry = (int) round(random(-2, 2));
     // direction random , color fades. lerp to interpolate.
     color c1 = get(x, y);
@@ -151,6 +156,16 @@ void changeWorks(float dt) {
     Work w = findWork(ox, oy);
     if (w!=null) w.changeIt();
   }
+  tChange += dt;
+  if (tChange > ((randomGaussian()/2) + 3.0) ) {
+  	tChange = 0;
+  	Work w = aWorks.get(selWork);
+  	if (w.isClickable)
+  		w.changeIt();
+  	selWork++;
+  	if (selWork >= aWorks.size())
+  		selWork = 0;
+  }
 }
 
 void draw() {
@@ -158,10 +173,11 @@ void draw() {
   float dt = ((float)(millis() - prevMillis))/1000;
   prevMillis = millis();
 
+	background(255);
   changeWorks(dt);
-  //drawPixelFxBars(dt, 3);
-  //drawDiffusion(dt);
   drawIcons(dt);
+  //drawPixelFxBars(dt, 30);
+  //drawDiffusion(dt);
 }
 
 Work findWork(float x, float y) {
