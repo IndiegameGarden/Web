@@ -15,6 +15,8 @@ void addWorks() {
   //exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   exe ("quest", "Quest for the Pixel Princess", "Quest for the Pixel Princess.exe", 6229);
   icon("2002");
+  work("grid-location", null);
+  work("crashed-application", null);
   work("curved", null);
   work("ultrasonic-reflections", null);
 }
@@ -79,7 +81,7 @@ void exeJpg(String id, String title, String exeFile, int kbSize) {
 
 void setup() {
   smooth();
-  size(800, 280 );
+  size(800, 330 );
   background(255);
   addWorks();
 }
