@@ -1,16 +1,16 @@
 
 
 void addWorks() {
-  yr(2014); 
+  yr(2014);
   icon("2014");
   work("dance", "Dance!");
   work("arginino", null);
   work("VII", null);
-  yr(2013); 
+  yr(2013);
   icon("2013");
   exe ("quest14", "Quest for the Pixel Princess XIV", "Quest for the Pixel Princess XIV.exe", 4239);
   //exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
-  yr(2012); 
+  yr(2012);
   icon("2012");
   //exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   exe ("quest", "Quest for the Pixel Princess", "Quest for the Pixel Princess.exe", 6229);
@@ -21,6 +21,7 @@ void addWorks() {
   work("ultrasonic-reflections", null);
 }
 
+float lastInnerWidth, lastInnerHeight;
 boolean isSelected = false;
 float selx, sely; // mouse cursor pos of selected work
 float dx=116; // grid
@@ -81,9 +82,14 @@ void exeJpg(String id, String title, String exeFile, int kbSize) {
 
 void setup() {
   smooth();
-  size(800, 330 );
   background(255);
   addWorks();
+  lastInnerWidth = window.innerWidth;
+  lastInnerHeight = window.innerHeight;
+  MAX_COLS = floor(window.innerWidth * 0.9/dx);
+  MAX_ROWS = ceil(aWorks.size() / MAX_COLS );
+  size(MAX_COLS * dx, MAX_ROWS * dy);
+  //size(800, 330 );
 }
 
 void drawPixelFxBars(float dt, int Niter) {
@@ -99,7 +105,7 @@ void drawPixelFxBars(float dt, int Niter) {
       float dx0= 1.0/((float)abs(w));
       int j=0;
       color c;
-      for (x0=0; x0 <= 1; x0+=dx0) {        
+      for (x0=0; x0 <= 1; x0+=dx0) {
         c=lerpColor(#FFFFFF, c1, x0);
         set(x+j, y, c);
         if (w>=0)
@@ -135,7 +141,7 @@ void drawIcons(float dt) {
   int x= 0;
   int y = 0;
   for (n=0; n < aWorks.size(); n++) {
-    Work w = aWorks.get(n);    
+    Work w = aWorks.get(n);
     if ( w.hasNewline && n > 0 ) {
       x=0;
       y++;
@@ -155,7 +161,7 @@ void changeWorks(float dt) {
   float ox=selx, oy=sely;
   locateMouse();
   if (selx!=ox || sely!=oy) {
-    Work w = findWork(ox, oy);
+    Work w = findWork(selx, sely);
     if (w!=null) w.changeIt();
   }
   tChange += dt;
@@ -175,7 +181,17 @@ void draw() {
   float dt = ((float)(millis() - prevMillis))/1000;
   prevMillis = millis();
 
-	background(255);
+  // auto-resizing behaviour for browser
+  if (lastInnerWidth != window.innerWidth || lastInnerHeight != window.innerHeight) {
+    MAX_COLS = floor(window.innerWidth * 0.9/dx);
+    MAX_ROWS = ceil(aWorks.size() / MAX_COLS );
+    size(MAX_COLS * dx, MAX_ROWS * dy);
+    background(0);
+    lastInnerWidth = window.innerWidth;
+    lastInnerHeight = window.innerHeight;
+  }
+
+  background(255);
   changeWorks(dt);
   drawIcons(dt);
   //drawPixelFxBars(dt, 30);
@@ -185,7 +201,7 @@ void draw() {
 Work findWork(float x, float y) {
   for (int i=0; i < aWorks.size(); i++) {
     Work w = aWorks.get(i);
-    if (w.isLoaded && w.x==x && w.y==y) 
+    if (w.isLoaded && w.x==x && w.y==y)
       return w;
   }
   return null;
@@ -195,8 +211,8 @@ void locateMouse() {
   float xf = floor(mouseX/dx);
   float yf = floor(mouseY/dy);
   float xr = (mouseX/dx)-xf; // remainder part
-  float yr = (mouseY/dy)-yf;  
-  // check within bounds of icon 
+  float yr = (mouseY/dy)-yf;
+  // check within bounds of icon
   if (xr >= BRDx && xr <= (1.0-BRDx) && yr >= BRDy && yr <= (1.0-BRDy) ) {
     selx = (int) xf;
     sely = (int) yf;
@@ -285,7 +301,7 @@ class Work {
         //stroke(5,5,5,220);
         //arc(x*dx+dxim/2,y*dy+dyim/2, ((float)dxim)/1.6, ((float)dyim)/1.6, 0, TWO_PI * circleAnim/circleAnimEnd );
         strokeWeight(14);
-        stroke(250, 80, 70, 190);        
+        stroke(250, 80, 70, 190);
         arc(x*dx+dx/2, y*dy+dy/2, ((float)dxim)/1.5, ((float)dyim)/1.5, 0, TWO_PI * circleAnim/circleAnimEnd );
         circleAnim += dt;
         if (circleAnim >= circleAnimEnd) {
@@ -316,7 +332,7 @@ class Work {
   void grabRandomIconPart(int w, int h) {
     int x0 = icon.width - w;
     int y0 = icon.height - h;
-    if (x0>=0 || y0>=0) 
+    if (x0>=0 || y0>=0)
       iconPart = icon.get((int)round(random(0, x0+1)), (int)round(random(0, y0+1)), w, h);
     else
       iconPart = icon;

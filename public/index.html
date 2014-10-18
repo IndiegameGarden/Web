@@ -5,36 +5,35 @@
   <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1">
   <meta name="description" content="Indiegame Garden">
   <meta name="author" content="Indiegame Garden">
-  <meta name="keywords" content="indiegame, game garden, indie, games, video games, GAME, web art, art, music, experiences, experimental">
+  <meta name="keywords" content="indiegame, game garden, indie, games, indie games, video games, GAME, web art, art, music, experiences, experimental">
   <title>Indiegame Garden</title>
-  
+
 	<style type="text/css">
 	body {
 	  background-color: #fff; color: #111;
 	  font-family: Lucida Grande, Lucida Sans, Arial, Helvetica Neue, Verdana, Geneva, sans-serif;
-	  font-size: 14px; font-weight: normal; text-decoration: none;
-		line-height: 1.5em;
+	  font-size: 14px; font-weight: normal; text-decoration: none; line-height: 1.5em;
 	}
 	h1 {
 	  font-family: Arial, Helvetica Neue, Verdana, Geneva, sans-serif;
 		width: 100%; letter-spacing: 0.1em;
 		margin-bottom: 1em; font-size: 1.65em;
 	}
-	canvas { 
-		display: block; 
-		outline: 0px; 
+	canvas {
+		display: block;
+		outline: 0px;
 		margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto; 
+        margin-left: auto;
+        margin-right: auto;
 	}
-	#iconspace { 
+	#iconspace {
 		margin: 0px; padding: 0px;
-		width: 800px; overflow: hidden; overflow-x: hidden;
+		overflow: hidden; overflow-x: hidden;
 	}
 	#page {
     margin-left: auto;
-    margin-right: auto; 
-    width: 800px;		
+    margin-right: auto;
+    width: 90%;
 	}
 	</style>
 
@@ -52,16 +51,17 @@ function getProcessingSketchId () { return 'iggproc'; }
 		<div>
 			<img src="images/igg-forest.png"/>
 		</div>
-		<div>            
+		<div>
 	  	<b>Games. Art. Music. Experiences.</b>
-		</div>	
-	  
-	  <div id="iconspace">       
+		</div>
+
+	  <div id="iconspace">
 			<canvas id="iggproc" data-processing-sources="iggproc.pde" width="800" height="260">
 				<p>Your browser does not support the canvas tag.</p>
 			</canvas>
 			<noscript>
-				<p>JavaScript is required to view the contents of this page.</p>
+				<p>Games. Art. Music. Experiences.
+                   JavaScript is required to view the contents of this page.</p>
 			</noscript>
 		</div>
 	  <div>
