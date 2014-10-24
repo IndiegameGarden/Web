@@ -1,4 +1,4 @@
-
+/* @pjs font='m39.ttf' */
 
 void addWorks() {
   yr(2014);
@@ -15,10 +15,10 @@ void addWorks() {
   //exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   exe ("quest", "Quest for the Pixel Princess", "Quest for the Pixel Princess.exe", 6229);
   icon("2002");
-  work("grid-location", null);
-  work("crashed-application", null);
-  work("curved", null);
-  work("ultrasonic-reflections", null);
+  work("grid-location", "Grid Location");
+  work("crashed-application", "crashed application");
+  work("curved", "Curved");
+  work("ultrasonic-reflections", "ultrasonic reflections");
 }
 
 float lastInnerWidth, lastInnerHeight;
@@ -88,8 +88,11 @@ void setup() {
   lastInnerHeight = window.innerHeight;
   MAX_COLS = floor(window.innerWidth * 0.9/dx);
   MAX_ROWS = ceil(aWorks.size() / MAX_COLS );
-  size(MAX_COLS * dx, MAX_ROWS * dy);
-  //size(800, 330 );
+  size(MAX_COLS * dx, MAX_ROWS * dy + (dy-dyim));
+  PFont font;
+  font = loadFont("m39.ttf");
+  textFont(font,8);
+  textAlign(LEFT);
 }
 
 void drawPixelFxBars(float dt, int Niter) {
@@ -136,12 +139,14 @@ void drawDiffusion(float dt) {
 
 void drawIcons(float dt) {
   PImage img;
+  Work w;
   int n=0;
   //println("Drawing "+aWorks.size()+" works.");
   int x= 0;
   int y = 0;
+
   for (n=0; n < aWorks.size(); n++) {
-    Work w = aWorks.get(n);
+    w = aWorks.get(n);
     if ( w.hasNewline && n > 0 ) {
       x=0;
       y++;
@@ -155,19 +160,32 @@ void drawIcons(float dt) {
       y++;
     }
   }
+
+  float bx = (dx-dxim)/2;
+  float by = (dy-dyim)/2;
+  w = findWork(selx, sely);
+  if (w!= null && w.isClickable) {
+    fill(0, 42, 103);
+    String t = w.title;
+    if (w.isExe) {
+      t += " (" + w.mbSize() + " MB .EXE)";
+    }
+    text(t, selx*dx+bx,sely*dy+dy+by/2);
+  }
+
 }
 
 void changeWorks(float dt) {
   float ox=selx, oy=sely;
   locateMouse();
+  Work w = findWork(selx, sely);
   if (selx!=ox || sely!=oy) {
-    Work w = findWork(selx, sely);
     if (w!=null) w.changeIt();
   }
   tChange += dt;
   if (tChange > ((randomGaussian()/2) + 3.0) ) {
   	tChange = 0;
-  	Work w = aWorks.get(selWork);
+  	w = aWorks.get(selWork);
   	if (w.isClickable)
   		w.changeIt();
   	selWork++;
@@ -185,7 +203,7 @@ void draw() {
   if (lastInnerWidth != window.innerWidth || lastInnerHeight != window.innerHeight) {
     MAX_COLS = floor(window.innerWidth * 0.9/dx);
     MAX_ROWS = ceil(aWorks.size() / MAX_COLS );
-    size(MAX_COLS * dx, MAX_ROWS * dy);
+    size(MAX_COLS * dx, MAX_ROWS * dy + (dy-dyim));
     background(0);
     lastInnerWidth = window.innerWidth;
     lastInnerHeight = window.innerHeight;
@@ -268,21 +286,25 @@ class Work {
   float circleAnim = 0.0;
   float circleAnimEnd = 0.0;
 
-  public Work(String id, int year, String title, String iconType) {
+  public Work(String id, int year, String titlePar, String iconType) {
     this.id = id;
     this.year = year;
     this.name = id;
     this.url = id;
     this.iconFile = ICON_DIR + "/" + id + "." + iconType;
-    if (title==null)
+    if (titlePar==null)
       this.title = id;
     else
-      this.title = title;
+      this.title = titlePar;
     loadIcon(iconFile);
   }
 
   public boolean isDownloading() {
     return circleAnimEnd > 0.0;
+  }
+
+  public float mbSize() {
+    return round(kbSize/102.4) / 10.0;
   }
 
   public void drawIt(float dt) {
