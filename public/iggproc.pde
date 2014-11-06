@@ -8,7 +8,7 @@ void addWorks() {
   work("VII", null);
   yr(2013);
   icon("2013");
-  exe ("quest14", "Quest for the Pixel Princess XIV", "Quest for the Pixel Princess XIV.exe", 4239);
+  work("quest14", "Quest for the Pixel Princess XIV");
   //exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
   yr(2012);
   icon("2012");
