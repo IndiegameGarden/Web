@@ -13,7 +13,7 @@ void addWorks() {
   yr(2012);
   icon("2012");
   //exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
-  exe ("quest", "Quest for the Pixel Princess", "Quest for the Pixel Princess.exe", 6229);
+  work("quest", "Quest for the Pixel Princess");
   icon("2002");
   work("grid-location", "Grid Location");
   work("crashed-application", "crashed application");
@@ -24,12 +24,12 @@ void addWorks() {
 float lastInnerWidth, lastInnerHeight;
 boolean isSelected = false;
 float selx, sely; // mouse cursor pos of selected work
-float dx=116; // grid
-float dy=116;
+float dx=128; // grid
+float dy=128;
 float mbitPerSec = 5;
 float tChange = 0;
-int dxim=100; // image sz
-int dyim=100;
+int dxim=126; // image sz
+int dyim=126;
 String DOWNLOAD_DIR = "games";
 String ICON_DIR = "images";
 int MAX_COLS = 6;
@@ -91,7 +91,7 @@ void setup() {
   size(MAX_COLS * dx, MAX_ROWS * dy + (dy-dyim));
   PFont font;
   font = loadFont("m39.ttf");
-  textFont(font,8);
+  textFont(font,10);
   textAlign(LEFT);
 }
 
@@ -151,11 +151,15 @@ void drawIcons(float dt) {
       x=0;
       y++;
     }
+    if ( !w.isClickable && x >= MAX_COLS-1 ) {
+      x=0;
+      y++;
+    }
     w.x = x;
     w.y = y;
     w.drawIt(dt);
     x++;
-    if ( x >= MAX_COLS) {
+    if ( x >= MAX_COLS ) {
       x=0;
       y++;
     }
@@ -165,12 +169,19 @@ void drawIcons(float dt) {
   float by = (dy-dyim)/2;
   w = findWork(selx, sely);
   if (w!= null && w.isClickable) {
-    fill(0, 42, 103);
+    fill(255, 254, 253);
     String t = w.title;
     if (w.isExe) {
       t += " (" + w.mbSize() + " MB .EXE)";
     }
-    text(t, selx*dx+bx,sely*dy+dy+by/2);
+    tx = selx*dx+bx;
+    ty = sely*dy+dy+by/4;
+    text(t, tx-1,ty-1);
+    text(t, tx+1,ty-1);
+    text(t, tx-1,ty+1);
+    text(t, tx+1,ty+1);
+    fill(0, 14, 51);
+    text(t, tx+0,ty+0);
   }
 
 }
