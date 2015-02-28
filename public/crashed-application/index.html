@@ -8,11 +8,33 @@
   left: 50%;
   margin-left: -290px;
 	}
+img.bg {
+  /* Set rules to fill background */
+  min-height: 347px;
+  min-width: 581px;
+
+  /* Set up proportionate scaling */
+  width: 102%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0px;
+  left: -20px;
+}
+
+@media screen and (max-width: 536px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -310px; */  /* 50% */
+  }
+}
+	
 		</style>
 	</head>
 	<body>
 		<div>
-			<img class="content" src="crashed-application.png"/>
+			<img class="bg" src="crashed-application.png"/>
 		</div>
 	</body>
 </html>

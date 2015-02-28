@@ -3,16 +3,33 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>Grid Location</title>
 		<style type="text/css">
-	img.content { 
-	 position: absolute;
-  left: 50%;
-  margin-left: -268px;
-	}
+
+img.bg {
+  /* Set rules to fill background */
+  min-height: 390px;
+  min-width: 536px;
+
+  /* Set up proportionate scaling */
+  width: 80%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0px;
+}
+
+@media screen and (max-width: 536px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -268px; */  /* 50% */
+  }
+}
+	
 		</style>
 	</head>
 	<body>
 		<div>
-			<img class="content" src="grid-location.png"/>
+			<img class="bg" src="grid-location.png"/>
 		</div>
 	</body>
 </html>

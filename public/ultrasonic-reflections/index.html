@@ -8,11 +8,34 @@
   left: 50%;
   margin-left: -456px;
 	}
+img.bg {
+  /* Set rules to fill background */
+  min-height: 556px;
+  min-width: 456px;
+
+  /* Set up proportionate scaling */
+  width: auto;
+  height: 95%;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0px;  
+  left: 50%;
+  margin-left: -228px;
+}
+
+@media screen and (max-width: 912px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -228px;
+  }
+}
+	
 		</style>
 	</head>
 	<body>
 		<div>
-			<img class="content" src="ultrasonic-reflections.jpg"/>
+			<img class="bg" src="ultrasonic-reflections.jpg"/>
 		</div>
 	</body>
 </html>
