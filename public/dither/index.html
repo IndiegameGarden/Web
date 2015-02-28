@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Dither</title>
+		<style type="text/css">
+
+img.bg {
+  /* Set rules to fill background */
+  min-height: 524px;
+  min-width: 419px;
+
+  /* Set up proportionate scaling */
+  width: auto;
+  height: 100%;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  right: 0px;
+}
+
+@media screen and (max-width: 419px) { /* Specific to this particular image */
+  img.bg {
+    /*left: 50%;*/
+    /*margin-left: -210px; */  /* 50% */
+  }
+}
+	
+		</style>
+	</head>
+	<body>
+		<div>
+			<img class="bg" src="dither.png"/>
+		</div>
+	</body>
+</html>

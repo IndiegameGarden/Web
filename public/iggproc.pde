@@ -2,19 +2,16 @@
 
 void addWorks() {
   yr(2014);
-  icon("2014");
+  work("dither","Dither");
   work("dance", "Dance!");
   work("arginino", null);
   work("VII", null);
-  yr(2013);
-  icon("2013");
+  yr(2013);  
   work("quest14", "Quest for the Pixel Princess XIV");
   //exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
   yr(2012);
-  icon("2012");
   //exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   work("quest", "Quest for the Pixel Princess");
-  icon("2002");
   work("grid-location", "Grid Location");
   work("crashed-application", "crashed application");
   work("curved", "Curved");
