@@ -21,15 +21,16 @@ void addWorks() {
 float lastInnerWidth, lastInnerHeight;
 boolean isSelected = false;
 float selx, sely; // mouse cursor pos of selected work
-float dx=128; // grid
-float dy=128;
+float dx=196; // grid
+float dy=196;
 float mbitPerSec = 5;
 float tChange = 0;
-int dxim=126; // image sz
-int dyim=126;
+int dxim=194; // image sz
+int dyim=194;
 String DOWNLOAD_DIR = "games";
 String ICON_DIR = "images";
-int MAX_COLS = 6;
+int MAX_COLS = 0;
+int MAX_ROWS = 0;
 float BRDx = ((dx-dxim)/2)/dx;
 float BRDy = ((dy-dyim)/2)/dy;
 int curYear = 0;
