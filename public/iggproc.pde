@@ -6,7 +6,7 @@ void addWorks() {
   work("dance", "Dance!");
   work("arginino", null);
   work("VII", null);
-  yr(2013);  
+  yr(2013);
   work("quest14", "Quest for the Pixel Princess XIV");
   //exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
   yr(2012);
@@ -80,7 +80,7 @@ void exeJpg(String id, String title, String exeFile, int kbSize) {
 
 void setup() {
   smooth();
-  background(255);
+  background(0);
   addWorks();
   lastInnerWidth = window.innerWidth;
   lastInnerHeight = window.innerHeight;
@@ -91,48 +91,6 @@ void setup() {
   font = loadFont("m39.ttf");
   textFont(font,10);
   textAlign(LEFT);
-}
-
-void drawPixelFxBars(float dt, int Niter) {
-  for ( int i=0 ; i < Niter; i++ ) {
-    int x = (int) random(0, width);
-    int y = (int) random(0, height);
-    int w = (int) random(-30, 30);
-    color c1 = get(x, y);
-    //color c2 = get(x+1, y);
-    float dif = 0; //abs(brightness(c1)-brightness(c2));
-    if (dif >= 0 ) {
-      float x0;
-      float dx0= 1.0/((float)abs(w));
-      int j=0;
-      color c;
-      for (x0=0; x0 <= 1; x0+=dx0) {
-        c=lerpColor(#FFFFFF, c1, x0);
-        set(x+j, y, c);
-        if (w>=0)
-          j++;
-        else
-          j--;
-      }
-    }
-  }
-}
-
-void drawDiffusion(float dt) {
-  int x = mouseX;
-  int y = mouseY;
-  x+=random(-68, 68);
-  y+=random(-68, 68);
-  for (int i=0; i < 100; i++) {
-    int rx = (int) round(	(-2, 2));
-    int ry = (int) round(random(-2, 2));
-    // direction random , color fades. lerp to interpolate.
-    color c1 = get(x, y);
-    color c2 = get(x+rx, y+ry);
-    set(x+rx, y+ry, lerpColor(c1, c2, 0.5));
-    x+=random(-4,3);
-    y+=random(-3,4);
-  }
 }
 
 void drawIcons(float dt) {
@@ -184,22 +142,14 @@ void drawIcons(float dt) {
 
 }
 
-void changeWorks(float dt) {
+void changeWorksFast(float dt) {
   float ox=selx, oy=sely;
   locateMouse();
-  Work w = findWork(selx, sely);
-  if (selx!=ox || sely!=oy) {
-    if (w!=null) w.changeIt();
-  }
-  tChange += dt;
-  if (tChange > ((randomGaussian()/2) + 3.0) ) {
-  	tChange = 0;
-  	w = aWorks.get(selWork);
+
+  for (n=0; n < aWorks.size(); n++) {
+  	w = aWorks.get(n);
   	if (w.isClickable)
-  		w.changeIt();
-  	selWork++;
-  	if (selWork >= aWorks.size())
-  		selWork = 0;
+  		w.panZoomIt(dt);
   }
 }
 
@@ -218,11 +168,9 @@ void draw() {
     lastInnerHeight = window.innerHeight;
   }
 
-  background(255);
-  changeWorks(dt);
+  background(0);
+  changeWorksFast(dt);
   drawIcons(dt);
-  //drawPixelFxBars(dt, 30);
-  //drawDiffusion(dt);
 }
 
 Work findWork(float x, float y) {
@@ -295,6 +243,13 @@ class Work {
   float circleAnim = 0.0;
   float circleAnimEnd = 0.0;
 
+  float iconX = 0.0;
+  float iconY = 0.0;
+  float iconW = dxim;
+  float iconH = dyim;
+  float panVx = 0.5;
+  float panVy = 0.5;
+
   public Work(String id, int year, String titlePar, String iconType) {
     this.id = id;
     this.year = year;
@@ -306,6 +261,7 @@ class Work {
     else
       this.title = titlePar;
     loadIcon(iconFile);
+    setRandomPanZoom();
   }
 
   public boolean isDownloading() {
@@ -353,6 +309,12 @@ class Work {
     grabRandomIconPart(dxim, dyim);
   }
 
+  public void panZoomIt(float dt) {
+    iconX += panVx * dt;
+    iconY += panVy * dt;
+    iconPart = icon.get((int)round(iconX), (int)round(iconY), iconW, iconH);
+  }
+
   public void downloadIt() {
     if (circleAnimEnd==0) {
       circleAnim = 0.0;
@@ -372,6 +334,13 @@ class Work {
   void loadIcon(String fn) {
     //println("loading "+fn);
     icon = loadImage(fn);
+  }
+
+  void setRandomPanZoom() {
+    panVx = random(-5,5);
+    panVy = random(-5,5);
+    iconX = random(0,icon.width/2);
+    iconY = random(0,icon.height/2);
   }
 
   public String toString() {
