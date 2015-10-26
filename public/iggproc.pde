@@ -149,7 +149,19 @@ void changeWorksFast(float dt) {
   for (n=0; n < aWorks.size(); n++) {
   	w = aWorks.get(n);
   	if (w.isClickable)
-  		w.panZoomIt(dt);
+  		w.changeIt(dt);
+  }
+}
+
+void changeWorksSlow(float dt) {
+  float ox=selx, oy=sely;
+  locateMouse();
+
+  if ( random() < 0.01 ) {
+    int n = (int) random(0,aWorks.size());
+    w = aWorks.get(n);
+    if (w.isClickable)
+      w.changeIt(dt);
   }
 }
 
@@ -169,7 +181,7 @@ void draw() {
   }
 
   background(0);
-  changeWorksFast(dt);
+  changeWorksSlow(dt);
   drawIcons(dt);
 }
 
@@ -301,6 +313,19 @@ class Work {
       if (icon.width > 0) {
         isLoaded = true;
         grabRandomIconPart(dxim, dyim);
+      }else{
+        fill(255, 255, 255, 210);
+        noStroke();
+        rect(x*dx, y*dy, dx, dy);
+        strokeCap(ROUND);
+        noFill();
+        //strokeWeight(12);
+        //stroke(5,5,5,220);
+        //arc(x*dx+dxim/2,y*dy+dyim/2, ((float)dxim)/1.6, ((float)dyim)/1.6, 0, TWO_PI * circleAnim/circleAnimEnd );
+        strokeWeight(14);
+        stroke(250, 80, 70, 190);
+        arc(x*dx+dx/2, y*dy+dy/2, ((float)dxim)/1.5, ((float)dyim)/1.5, 0, TWO_PI * circleAnim/circleAnimEnd );
+        circleAnim += dt;
       }
     }
   }
