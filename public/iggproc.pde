@@ -1,21 +1,19 @@
 /* @pjs font='m39.ttf' */
 
 void addWorks() {
-  yr(2014);
   work("dither","Dither");
   work("dance", "Dance!");
   work("arginino", null);
   work("VII", null);
-  yr(2013);
-  work("quest14", "Quest for the Pixel Princess XIV");
-  //exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
-  yr(2012);
-  //exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
-  work("quest", "Quest for the Pixel Princess");
   work("grid-location", "Grid Location");
   work("crashed-application", "crashed application");
   work("curved", "Curved");
   work("ultrasonic-reflections", "ultrasonic reflections");
+
+  exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249).hasNewline=true;
+  exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
+  work("quest14", "Quest for the Pixel Princess XIV");
+  work("quest", "Quest for the Pixel Princess");
 }
 
 float lastInnerWidth, lastInnerHeight;
@@ -33,49 +31,45 @@ int MAX_COLS = 0;
 int MAX_ROWS = 0;
 float BRDx = ((dx-dxim)/2)/dx;
 float BRDy = ((dy-dyim)/2)/dy;
-int curYear = 0;
 int prevMillis = 0;
 ArrayList<Work> aWorks = new ArrayList<Work>();
 int selWork = 0;
 
-// helper method 'set new year'
-void yr(int yr) {
-  curYear = yr;
-}
-
 // helper method 'icon'
-void icon(String id) {
-  Work w = new Work(id, curYear, id, "png");
+Work icon(String id) {
+  Work w = new Work(id, id, "png");
   w.isClickable = false;
-  //w.hasNewline = true;
   aWorks.add(w);
+  return w;
 }
 
 // helper methods 'online work'
-void workAdd(String id, String title, String iconType) {
-  Work w = new Work(id, curYear, title, iconType);
+Work workAdd(String id, String title, String iconType) {
+  Work w = new Work(id, title, iconType);
   aWorks.add(w);
+  return w;
 }
-void work(String id, String title) {
-  workAdd( id,  title,  "png");
+Work work(String id, String title) {
+  return workAdd( id,  title,  "png");
 }
-void workJpg(String id, String title) {
-  workAdd( id,  title,  "jpg");
+Work workJpg(String id, String title) {
+  return workAdd( id,  title,  "jpg");
 }
 
 // helper methods 'exe work'
-void exeAdd(String id, String title, String exeFile, int kbSize, String iconType) {
-  Work w = new Work(id, curYear, title, iconType);
+Work exeAdd(String id, String title, String exeFile, int kbSize, String iconType) {
+  Work w = new Work(id, title, iconType);
   w.isExe = true;
   w.exeFile = exeFile;
   w.kbSize = kbSize;
   aWorks.add(w);
+  return w;
 }
-void exe(String id, String title, String exeFile, int kbSize) {
-   exeAdd( id,  title,  exeFile,  kbSize, "png");
+Work exe(String id, String title, String exeFile, int kbSize) {
+   return exeAdd( id,  title,  exeFile,  kbSize, "png");
 }
-void exeJpg(String id, String title, String exeFile, int kbSize) {
-   exeAdd(id,  title,  exeFile,  kbSize, "jpg");
+Work exeJpg(String id, String title, String exeFile, int kbSize) {
+   return exeAdd(id,  title,  exeFile,  kbSize, "jpg");
 }
 
 void setup() {
@@ -240,7 +234,6 @@ class Work {
   String id;
   String name;
   String url;
-  int year;
   String title;
   boolean isExe = false;
   boolean isClickable = true;
@@ -262,9 +255,8 @@ class Work {
   float panVx = 0.5;
   float panVy = 0.5;
 
-  public Work(String id, int year, String titlePar, String iconType) {
+  public Work(String id, String titlePar, String iconType) {
     this.id = id;
-    this.year = year;
     this.name = id;
     this.url = id;
     this.iconFile = ICON_DIR + "/" + id + "." + iconType;
