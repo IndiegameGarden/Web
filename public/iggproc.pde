@@ -10,7 +10,8 @@ void addWorks() {
   work("curved", "Curved");
   work("ultrasonic-reflections", "ultrasonic reflections");
 
-  exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249).hasNewline=true;
+  workJpg("indiegig", "IndieGig" ).hasNewline=true;
+  exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
   exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   work("quest14", "Quest for the Pixel Princess XIV");
   work("quest", "Quest for the Pixel Princess");
