@@ -79,7 +79,7 @@ void setup() {
   lastInnerWidth = window.innerWidth;
   lastInnerHeight = window.innerHeight;
   MAX_COLS = floor(window.innerWidth * 0.9/dx);
-  MAX_ROWS = ceil(aWorks.size() / MAX_COLS );
+  MAX_ROWS = 1+ceil(aWorks.size() / MAX_COLS );
   size(MAX_COLS * dx, MAX_ROWS * dy + (dy-dyim));
   PFont font;
   font = loadFont("m39.ttf");
@@ -97,11 +97,7 @@ void drawIcons(float dt) {
 
   for (n=0; n < aWorks.size(); n++) {
     w = aWorks.get(n);
-    if ( w.hasNewline && n > 0 ) {
-      x=0;
-      y++;
-    }
-    if ( !w.isClickable && x >= MAX_COLS-1 ) {
+    if ( w.hasNewline && x > 0) {
       x=0;
       y++;
     }
@@ -167,7 +163,7 @@ void draw() {
   // auto-resizing behaviour for browser
   if (lastInnerWidth != window.innerWidth || lastInnerHeight != window.innerHeight) {
     MAX_COLS = floor(window.innerWidth * 0.9/dx);
-    MAX_ROWS = ceil(aWorks.size() / MAX_COLS );
+    MAX_ROWS = 1+ceil(aWorks.size() / MAX_COLS );
     size(MAX_COLS * dx, MAX_ROWS * dy + (dy-dyim));
     lastInnerWidth = window.innerWidth;
     lastInnerHeight = window.innerHeight;
