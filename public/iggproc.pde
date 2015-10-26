@@ -19,12 +19,12 @@ void addWorks() {
 float lastInnerWidth, lastInnerHeight;
 boolean isSelected = false;
 float selx, sely; // mouse cursor pos of selected work
-float dx=196; // grid
-float dy=196;
+float dx=128; // grid
+float dy=128;
 float mbitPerSec = 5;
 float tChange = 0;
-int dxim=194; // image sz
-int dyim=194;
+int dxim=126; // image sz
+int dyim=126;
 String DOWNLOAD_DIR = "games";
 String ICON_DIR = "images";
 int MAX_COLS = 0;
@@ -169,7 +169,6 @@ void draw() {
     MAX_COLS = floor(window.innerWidth * 0.9/dx);
     MAX_ROWS = ceil(aWorks.size() / MAX_COLS );
     size(MAX_COLS * dx, MAX_ROWS * dy + (dy-dyim));
-    background(0);
     lastInnerWidth = window.innerWidth;
     lastInnerHeight = window.innerHeight;
   }
@@ -248,13 +247,6 @@ class Work {
   float circleAnim = 0.0;
   float circleAnimEnd = 0.0;
 
-  float iconX = 0.0;
-  float iconY = 0.0;
-  float iconW = dxim;
-  float iconH = dyim;
-  float panVx = 0.5;
-  float panVy = 0.5;
-
   public Work(String id, String titlePar, String iconType) {
     this.id = id;
     this.name = id;
@@ -265,7 +257,6 @@ class Work {
     else
       this.title = titlePar;
     loadIcon(iconFile);
-    setRandomPanZoom();
   }
 
   public boolean isDownloading() {
@@ -326,12 +317,6 @@ class Work {
     grabRandomIconPart(dxim, dyim);
   }
 
-  public void panZoomIt(float dt) {
-    iconX += panVx * dt;
-    iconY += panVy * dt;
-    iconPart = icon.get((int)round(iconX), (int)round(iconY), iconW, iconH);
-  }
-
   public void downloadIt() {
     if (circleAnimEnd==0) {
       circleAnim = 0.0;
@@ -351,13 +336,6 @@ class Work {
   void loadIcon(String fn) {
     //println("loading "+fn);
     icon = loadImage(fn);
-  }
-
-  void setRandomPanZoom() {
-    panVx = random(-5,5);
-    panVy = random(-5,5);
-    iconX = random(0,icon.width/2);
-    iconY = random(0,icon.height/2);
   }
 
   public String toString() {
