@@ -22,7 +22,9 @@ class Work {
 
   float circleAnim = 0.0;
   float circleAnimEnd = 5.0;
-  float rot = 0.0;
+  float rot = 0.0; // rotation value
+  float t = 0.0; // lifetime
+  public float loadIconTime = 0.0;
 
   static PImage circMask;
 
@@ -54,7 +56,7 @@ class Work {
       circMask.ellipse(dxim/2,dyim/2,dxim,dyim);
       circMask.endDraw();
     }
-    loadIcon(iconFile);
+    //loadIcon(iconFile);
   }
 
   public boolean isDownloading() {
@@ -70,12 +72,16 @@ class Work {
   }
 
   public void drawIt(float dt) {
+    t += dt;
+    float sc = (t-loadIconTime)/ICON_FADE_IN_TIME;
+    if (sc > 1) sc = 1.0;
     if (isLoaded) {
       float bx = (dx-dxim)/2;
       float by = (dy-dyim)/2;
       pushMatrix();
       translate((x*dx+bx)+dxim/2, (y*dy+by)+dyim/2);
       rotate(rot);
+      scale(sc);
       image(iconPart, -dxim/2,-dyim/2); //x*dx+bx, y*dy+by);
       popMatrix();
 
@@ -97,18 +103,12 @@ class Work {
     else
     {
       // test now if icon loaded!
-      if (icon.width > 0) {
+      if (icon == null && t >= loadIconTime) {
+        loadIcon(iconFile);
+      }
+      if (icon != null && icon.width > 0) {
         isLoaded = true;
         grabRandomIconPart(dxim, dyim);
-      }else{
-        fill(255, 255, 255, 210);
-        noStroke();
-        strokeCap(ROUND);
-        strokeWeight(14);
-        stroke(250, 80, 70, 190);
-        ellipse(x*dx+dx/2, y*dy+dy/2, circleAnim/circleAnimEnd*((float)dxim)/1.5, circleAnim/circleAnimEnd*((float)dyim)/1.5);
-        //arc(x*dx+dx/2, y*dy+dy/2, ((float)dxim)/1.5, ((float)dyim)/1.5, 0, TWO_PI * circleAnim/circleAnimEnd );
-        circleAnim += dt;
       }
     }
   }
@@ -126,6 +126,7 @@ class Work {
   }
 
   void grabRandomIconPart(int w, int h) {
+    if (icon==null) return;
     int x0 = icon.width - w;
     int y0 = icon.height - h;
     if (x0>=0 || y0>=0)
@@ -134,8 +135,6 @@ class Work {
       iconPart = icon;
     // apply mask to iconpart
     alternateMask(iconPart,circMask);
-    //circMaskcircMask(iconPart);
-    //iconPart = circMask;
   }
 
   void loadIcon(String fn) {

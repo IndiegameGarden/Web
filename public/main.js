@@ -30,6 +30,7 @@ String DOWNLOAD_DIR = "games";
 String ICON_DIR = "images";
 int MAX_COLS = 0;
 int MAX_ROWS = 0;
+float ICON_FADE_IN_TIME = 3.7; // sec
 float BRDx = ((dx-dxim)/2)/dx;
 float BRDy = ((dy-dyim)/2)/dy;
 int prevMillis = 0;
@@ -77,6 +78,7 @@ void setup() {
   smooth();
   background(0);
   addWorks();
+  setIconLoadTimes();
   lastInnerWidth = window.innerWidth;
   lastInnerHeight = window.innerHeight;
   MAX_COLS = floor(window.innerWidth * 0.9/dx);
@@ -86,6 +88,13 @@ void setup() {
   font = loadFont("m39.ttf");
   textFont(font,10);
   textAlign(LEFT);
+}
+
+void setIconLoadTimes() {
+  for (n=0; n < aWorks.size(); n++) {
+    w = aWorks.get(n);
+    w.loadIconTime = n * 0.14421;
+  }
 }
 
 void drawIcons(float dt) {
@@ -117,6 +126,7 @@ void drawIcons(float dt) {
   w = findWork(selx, sely);
   if (isSelected && w!= null && w.isClickable) {
     selWork = w;
+    w.t += dt; // advance time a bit faster when sel
     w.rotateBy(dt/10.0);
     fill(255, 254, 253);
     String t = w.title;
