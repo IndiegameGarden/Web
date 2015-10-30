@@ -22,10 +22,10 @@ boolean isSelected = false;
 float selx, sely; // mouse cursor pos of selected work
 float dx=128; // grid
 float dy=128;
-float mbitPerSec = 5;
+float mbitPerSec = 4;
 float tChange = 0;
-int dxim=126; // image sz
-int dyim=126;
+int dxim=112; // image sz
+int dyim=112;
 String DOWNLOAD_DIR = "games";
 String ICON_DIR = "images";
 int MAX_COLS = 0;
@@ -115,7 +115,7 @@ void drawIcons(float dt) {
   float bx = (dx-dxim)/2;
   float by = (dy-dyim)/2;
   w = findWork(selx, sely);
-  if (w!= null && w.isClickable) {
+  if (isSelected && w!= null && w.isClickable) {
     selWork = w;
     w.rotateBy(dt/10.0);
     fill(255, 254, 253);
