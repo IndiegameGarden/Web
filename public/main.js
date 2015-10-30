@@ -34,7 +34,7 @@ float BRDx = ((dx-dxim)/2)/dx;
 float BRDy = ((dy-dyim)/2)/dy;
 int prevMillis = 0;
 ArrayList<Work> aWorks = new ArrayList<Work>();
-int selWork = 0;
+Work selWork = null;
 
 // helper method 'icon'
 Work icon(String id) {
@@ -116,6 +116,8 @@ void drawIcons(float dt) {
   float by = (dy-dyim)/2;
   w = findWork(selx, sely);
   if (w!= null && w.isClickable) {
+    selWork = w;
+    w.rotateBy(dt/10.0);
     fill(255, 254, 253);
     String t = w.title;
     if (w.isExe) {

@@ -22,6 +22,7 @@ class Work {
 
   float circleAnim = 0.0;
   float circleAnimEnd = 5.0;
+  float rot = 0.0;
 
   static PImage circMask;
 
@@ -64,11 +65,19 @@ class Work {
     return round(kbSize/102.4) / 10.0;
   }
 
+  public float rotateBy(float r) {
+    rot += r;
+  }
+
   public void drawIt(float dt) {
     if (isLoaded) {
       float bx = (dx-dxim)/2;
       float by = (dy-dyim)/2;
-      image(iconPart, x*dx+bx, y*dy+by);
+      pushMatrix();
+      translate((x*dx+bx)+dxim/2, (y*dy+by)+dyim/2);
+      rotate(rot);
+      image(iconPart, -dxim/2,-dyim/2); //x*dx+bx, y*dy+by);
+      popMatrix();
 
       if (isDownloadin && (circleAnimEnd > 0.0)) {
         //fill(255, 255, 255, 210);
