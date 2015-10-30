@@ -135,25 +135,14 @@ void drawIcons(float dt) {
 
 }
 
-void changeWorksFast(float dt) {
-  float ox=selx, oy=sely;
-  locateMouse();
-
-  for (n=0; n < aWorks.size(); n++) {
-  	w = aWorks.get(n);
-  	if (w.isClickable)
-  		w.changeIt(dt);
-  }
-}
-
 void changeWorksSlow(float dt) {
   float ox=selx, oy=sely;
   locateMouse();
 
-  if ( random() < 0.01 ) {
+  if ( random() < 0.004 ) {
     int n = (int) random(0,aWorks.size());
     w = aWorks.get(n);
-    if (w.isClickable)
+    if (w.isClickable && w != selWork)
       w.changeIt(dt);
   }
 }
