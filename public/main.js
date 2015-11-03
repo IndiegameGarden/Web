@@ -219,9 +219,10 @@ void mouseClicked() {
 }
 
 void loadUrl(String url, boolean isOnlineWork) {
-   window.open(url, "_self");
+   //window.open(url, "_self");
+  var aif = document.getElementById('artiframe');
+  aif.src = url;
+  var af = document.getElementById('artframe');
+  af.setAttribute("style","display:inline");
   //println("Loading "+url); // for Java mode testing
 }
-
-
-
