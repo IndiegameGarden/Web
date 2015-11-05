@@ -219,10 +219,15 @@ void mouseClicked() {
 }
 
 void loadUrl(String url, boolean isOnlineWork) {
-   //window.open(url, "_self");
-  var aif = document.getElementById('artiframe');
-  aif.src = url;
-  var af = document.getElementById('artframe');
-  af.setAttribute("style","display:inline");
-  //println("Loading "+url); // for Java mode testing
+  if (!isOnlineWork) {
+    // is exe - download it
+    window.open(url, "_self");
+  }else{
+    // is online work - open in iframe.
+    var aif = document.getElementById('artiframe');
+    aif.src = url;
+    var af = document.getElementById('artframe');
+    af.setAttribute("style","display:inline");
+  }
+  //println("Loading "+url);
 }
