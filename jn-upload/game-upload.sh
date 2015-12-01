@@ -1,5 +1,9 @@
 #!/bin/bash
-#curl -A "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36" http://jetnet.indiegamegarden.com/jn-upload.html
+
+# put game html5 into a zip file
+zip -r ~/game.zip ~/Desktop/Game/BreakIt/Export/html5/bin/*
+
+# upload zip to server
 curl 'http://jetnet.indiegamegarden.com/jetnet-upload.php' \
   -A "Mozilla/5.0 (Windows NT 6.1)" \
-  -F "fileToUpload=@Astray.zip"
+  -F "fileToUpload=game.zip"
