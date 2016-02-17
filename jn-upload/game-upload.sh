@@ -23,13 +23,13 @@ popd
 
 # upload zip to server
 echo "Uploading file to web server... just a moment"
-curl 'http://jetnet.indiegamegarden.com/jetnet-upload.php' \
+curl 'http://play.indiegamegarden.com/jetnet-upload.php' \
   -A "Mozilla/5.0 (Windows NT 6.1)" \
   -F "fileToUpload=@$fn"
 
 echo " "
 echo "------------------------------------------------"
 echo "Game is online on:"
-echo "http://jetnet.indiegamegarden.com/game-store/$ID"
+echo "http://play.indiegamegarden.com/$ID"
 echo "------------------------------------------------"
 read -p "Press [ENTER] to exit."
