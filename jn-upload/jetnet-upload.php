@@ -1,7 +1,7 @@
 <?php
 echo "jetnet-upload.php v1.0<br>\n" ;
 $target_dir = "game-uploads/"; // where new zip files go
-$game_dir   = "game-store/"; // where unzipped files are hosted
+$game_dir   = "./"; // where unzipped files are hosted
 
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -40,6 +40,7 @@ if ($uploadOk == 0) {
           $zip->extractTo($game_dir);
           $zip->close();
           echo "File $file extracted to $game_dir<br>\n";
+		  unlink($file);
         } else {
           echo "Result -> Error, I couldn't open $file for unzipping.<br>\n";
         }
