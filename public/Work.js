@@ -3,12 +3,12 @@
  */
 class Work {
 
-  float x, y; // grid placement
+  public float x, y; // grid placement
 
-  String id;
-  String name;
-  String url;
-  String title;
+  public String id;
+  public String name;
+  public String url;
+  public String title;
   boolean isExe = false;
   boolean isClickable = true;
   boolean hasNewline = false;
@@ -22,8 +22,9 @@ class Work {
 
   float circleAnim = 0.0;
   float circleAnimEnd = 5.0;
-  float rot = 0.0; // rotation value
-  float t = 0.0; // lifetime
+  public float rot = 0.0; // rotation value
+  public float sc = 1.0; // scale value
+  public float t = 0.0; // lifetime
   public float loadIconTime = 0.0;
 
   static PImage circMask;
@@ -73,15 +74,15 @@ class Work {
 
   public void drawIt(float dt) {
     t += dt;
-    float sc = (t-loadIconTime)/ICON_FADE_IN_TIME;
-    if (sc > 1) sc = 1.0;
+    float sc1 = (t-loadIconTime)/ICON_FADE_IN_TIME;
+    if (sc1 > 1) sc1 = 1.0;
     if (isLoaded) {
       float bx = (dx-dxim)/2;
       float by = (dy-dyim)/2;
       pushMatrix();
       translate((x*dx+bx)+dxim/2, (y*dy+by)+dyim/2);
       rotate(rot);
-      scale(sc);
+      scale(sc*sc1);
       image(iconPart, -dxim/2,-dyim/2); //x*dx+bx, y*dy+by);
       popMatrix();
 
@@ -131,10 +132,12 @@ class Work {
     int y0 = icon.height - h;
     if (x0>=0 || y0>=0)
       iconPart = icon.get((int)round(random(0, x0+1)), (int)round(random(0, y0+1)), w, h);
-    else
-      iconPart = icon;
-    // apply mask to iconpart
-    alternateMask(iconPart,circMask);
+    else {
+      iconPart = createImage(dxim,dyim,RGB);
+	  iconPart.copy(icon,0,0,icon.width,icon.height,(dxim-icon.width)/2,(dyim-icon.height)/2,icon.width,icon.height);
+	}
+    // apply mask to iconpart - to make circle around image
+    // alternateMask(iconPart,circMask);
   }
 
   void loadIcon(String fn) {

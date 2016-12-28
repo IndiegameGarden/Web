@@ -1,18 +1,15 @@
 /* @pjs font='m39.ttf' */
 
 void addWorks() {
-  work("dither","Dither");
-  work("dance", "Dance!");
-  work("arginino", null);
-  work("VII", null);
-  work("grid-location", "Grid Location");
-  work("crashed-application", "crashed application");
-  work("curved", "Curved");
-  work("ultrasonic-reflections", "ultrasonic reflections");
-
-  work("kingofpixelot","The King of Pixelot","The King of Pixelot.exe", 9865).hasNewline=true;
+  work("kingofpixelot","The King of Pixelot","The King of Pixelot.exe", 9865);
   workJpg("indiegig", "IndieGig" );
+  exe  ("8bitkiller","8-Bit Killer","8bit KILLER.exe");
+  exe  ("arvoesine","Arvoesine","Arvoesine.exe");
   exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
+  exe  ("artibeus","Artibeus","artibeus.exe");
+  exe  ("foxaliens","Fox Aliens From Space","Fox Aliens From Space.exe");
+  exe  ("gametitle","Game Title","Game Title.exe");
+  exe  ("karate","KARATE","KARATE.exe");
   exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   work("quest14", "Quest for the Pixel Princess XIV");
   work("quest", "Quest for the Pixel Princess");
@@ -106,6 +103,8 @@ void drawIcons(float dt) {
   int x= 0;
   int y = 0;
 
+  Work wsel = findWork(selx, sely);
+
   for (n=0; n < aWorks.size(); n++) {
     w = aWorks.get(n);
     if ( w.hasNewline && x > 0) {
@@ -114,6 +113,8 @@ void drawIcons(float dt) {
     }
     w.x = x;
     w.y = y;
+	w.sc = 1.0 ;
+	if (w==wsel) w.sc += 0.1;
     w.drawIt(dt);
     x++;
     if ( x >= MAX_COLS ) {
@@ -124,15 +125,19 @@ void drawIcons(float dt) {
 
   float bx = (dx-dxim)/2;
   float by = (dy-dyim)/2;
-  w = findWork(selx, sely);
-  if (isSelected && w!= null && w.isClickable) {
-    selWork = w;
-    w.t += dt; // advance time a bit faster when sel
-    w.rotateBy(dt/10.0);
+
+  if (isSelected && wsel!= null && wsel.isClickable) {
+    selWork = wsel;
     fill(255, 254, 253);
-    String t = w.title;
-    if (w.isExe) {
-      t += " (" + w.mbSize() + " MB .EXE)";
+    String t = wsel.title;
+    if (wsel.isExe) {
+	  int mbs = 0;
+	  if (wsel.mbSize()>0) 
+		  mbs = wsel.mbSize();	
+	  if (mbs>0)
+		  t += " (" + mbs + " MB .EXE)";
+	  else
+		  t += " (.EXE)";
     }
     tx = selx*dx+bx;
     ty = sely*dy+dy+by/4;
@@ -150,10 +155,10 @@ void changeWorksSlow(float dt) {
   float ox=selx, oy=sely;
   locateMouse();
 
-  if ( random() < 0.004 ) {
+  if ( random() < 0.04 ) {
     int n = (int) random(0,aWorks.size());
     w = aWorks.get(n);
-    if (w.isClickable && w != selWork)
+    if (w.isClickable && w == selWork)
       w.changeIt(dt);
   }
 }
