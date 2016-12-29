@@ -11,6 +11,9 @@ void addWorks() {
   exe  ("foxaliens","Fox Aliens From Space","Fox Aliens From Space.exe");
   exe  ("gametitle","Game Title","Game Title.exe");
   exe  ("karate","KARATE","KARATE.exe");
+  exe  ("MagicOwl","Magic Owl","Magic Owl.exe");
+  exe  ("mythicdefence","Mythic Defence - The Rise of Evil","Mythic Defence - The rise of evil.exe",18362);
+  exe  ("supercratebox","Super Crate Box","Super Crate Box.exe",24075);
   exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   work("quest14", "Quest for the Pixel Princess XIV");
   work("quest", "Quest for the Pixel Princess");
