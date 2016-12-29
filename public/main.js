@@ -1,6 +1,7 @@
 /* @pjs font='m39.ttf' */
 
 void addWorks() {
+  exe  ("treetris","Treetris","Treetris.exe",4300);
   work("kingofpixelot","The King of Pixelot","The King of Pixelot.exe", 9865);
   workJpg("indiegig", "IndieGig" );
   exe  ("8bitkiller","8-Bit Killer","8bit KILLER.exe");
@@ -155,7 +156,7 @@ void changeWorksSlow(float dt) {
   float ox=selx, oy=sely;
   locateMouse();
 
-  if ( random() < 0.04 ) {
+  if ( random() < 0.09 ) {
     int n = (int) random(0,aWorks.size());
     w = aWorks.get(n);
     if (w.isClickable && w == selWork)
