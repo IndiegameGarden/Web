@@ -4,16 +4,23 @@ void addWorks() {
   exe  ("treetris","Treetris","Treetris.exe",4300);
   work("kingofpixelot","The King of Pixelot","The King of Pixelot.exe", 9865);
   workJpg("indiegig", "IndieGig" );
-  exe  ("8bitkiller","8-Bit Killer","8bit KILLER.exe");
-  exe  ("arvoesine","Arvoesine","Arvoesine.exe");
+  exe  ("8bitkiller","8-Bit Killer","8bit KILLER.exe",17432);
+  exe  ("arvoesine","Arvoesine","Arvoesine.exe", 4346);
   exeJpg ("wreckz", "Glorious Wreckz Garden", "GloriousWreckzGarden.exe", 6249);
-  exe  ("artibeus","Artibeus","artibeus.exe");
-  exe  ("foxaliens","Fox Aliens From Space","Fox Aliens From Space.exe");
-  exe  ("gametitle","Game Title","Game Title.exe");
-  exe  ("karate","KARATE","KARATE.exe");
-  exe  ("MagicOwl","Magic Owl","Magic Owl.exe");
+  exe  ("artibeus","Artibeus","artibeus.exe",14472);
+  exe  ("foxaliens","Fox Aliens From Space","Fox Aliens From Space.exe", 20172);
+  exe  ("gametitle","Game Title","Game Title.exe", 1652);
+  exe  ("karate","KARATE","KARATE.exe", 2278);
+  exe  ("MagicOwl","Magic Owl","Magic Owl.exe", 90630);
+  exe  ("benefitsofinsurance","Benefits of Life Insurance","Benefits of Life Insurance.exe", 1638);
+  exe  ("olson1","Olson's Journey","Olson's Journey.exe", 9111);
+  exe  ("olson2","Olson's Journey 2","Olson's Journey 2.exe", 19578);
+  exeJpg("potluck","Potluck","Potluck.exe",10733);
   exe  ("mythicdefence","Mythic Defence - The Rise of Evil","Mythic Defence - The rise of evil.exe",18362);
+  exe  ("starman","Starman","Starman.exe",1826);
   exe  ("supercratebox","Super Crate Box","Super Crate Box.exe",24075);
+  exe  ("wither","Wither","Wither.exe",26064);
+  exe  ("YETI-HUNTER","Yeti Hunter", "YETI HUNTER.exe",6588);
   exe ("igg", "Indiegame Garden", "Indiegame Garden 7.exe", 5513);
   work("quest14", "Quest for the Pixel Princess XIV");
   work("quest", "Quest for the Pixel Princess");
@@ -24,7 +31,7 @@ boolean isSelected = false;
 float selx, sely; // mouse cursor pos of selected work
 float dx=128; // grid
 float dy=128;
-float mbitPerSec = 4;
+float mbitPerSec = 12;
 float tChange = 0;
 int dxim=112; // image sz
 int dyim=112;
